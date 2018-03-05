@@ -9,6 +9,7 @@ export default class Logout extends Component {
   handleLogout = () => {
     this.props.onLogoutClick();
   }
+
   render() {
     return (
       <button onClick={this.handleLogout} className="btn btn-primary">

@@ -1,5 +1,5 @@
 import request from "superagent";
-import * as constants from "constants";
+import * as constants from "../constants";
 
 function requestLogout() {
   return {
@@ -83,7 +83,7 @@ export function loginUser(credentials) {
     dispatch(requestLogin(credentials));
     return (
       request
-        .post("/api/user/login", config)
+        .post("http://localhost:3000/api/user/login", config)
         .send(credentials)
         .then((response) => {
           // If login was successful, set the token in local storage
