@@ -18,7 +18,7 @@ export default class Navbar extends Component {
     this.props.authActions.logoutUser();
   }
 
-  render() {
+  renderMainNavBar() {
     const { isAuthenticated, errorMessage } = this.props;
 
     return (
@@ -41,6 +41,26 @@ export default class Navbar extends Component {
           </div>
         </div>
       </nav>
+    );
+  }
+
+  renderSubNav() {
+    return (
+      <nav aria-label="breadcrumb">
+        <ol className="breadcrumb" style={{backgroundColor: "white"}}>
+          <li className="breadcrumb-item"><a href="#">Home</a></li>
+          <li className="breadcrumb-item active" aria-current="page">User History</li>
+        </ol>
+      </nav>
+    );
+  }
+
+  render() {
+    return (
+      <div>
+        {this.renderMainNavBar()}
+        {this.renderSubNav()}
+      </div>
     );
   }
 
