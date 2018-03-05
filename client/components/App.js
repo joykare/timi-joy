@@ -4,28 +4,40 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as authActions from "../actions/Auth";
 import * as charactersActions from "../actions/MarvelCharacters";
+import * as eventActions from "../actions/Events";
 import Navbar from "./Navbar";
 import MarvelDisplayList from "./MarvelDisplayList";
 import MarvelDetailPage from "./MarvelDetailPage";
+import UserHistoryPage from "./UserHistoryPage";
 
 class App extends Component {
   static propTypes = {
     authActions: PropTypes.object,
     charactersActions: PropTypes.object,
     characters: PropTypes.array,
+    eventActions: PropTypes.object,
+    event: PropTypes.object,
+    fetchingEvents: PropTypes.bool,
     isAuthenticated: PropTypes.bool,
+    isFetching: PropTypes.bool,
     errorMessage: PropTypes.string,
+    user_events: PropTypes.array,
   }
 
   constructor(props) {
     super(props);
     this.state = {
       isClicked: false,
-      character: {}
+      character: {},
+      page: "home"
     };
   }
 
   handleClick = (character) => {
+    const characterClick = {
+      characterName: character.name
+    };
+    this.props.eventActions.saveClickHistory(characterClick);
     this.setState({
       character,
       isClicked: true
@@ -38,24 +50,39 @@ class App extends Component {
     });
   }
 
-  displayMarvelPage() {
-    const { isClicked, character } = this.state;
-    const { characters, charactersActions, isFetching } = this.props;
+  handleNavBarClick = (name) => {
+    this.setState({
+      page: name
+    });
+  }
 
-    if (isClicked) {
+  displayMarvelPage() {
+    const { isClicked, character, page } = this.state;
+    const { characters, charactersActions, isFetching,  eventActions, user_events, fetchingEvents} = this.props;
+
+    if (page === "home") {
       return (
-        <MarvelDetailPage
-          character={character}
-          handleBackClick={this.handleBackClick}
-        />
+        <div>
+          {isClicked ?
+            <MarvelDetailPage
+              character={character}
+              handleBackClick={this.handleBackClick}
+            /> :
+            <MarvelDisplayList
+              charactersActions={charactersActions}
+              characters={characters}
+              handleClick={this.handleClick}
+              isFetching={isFetching} />
+          }
+        </div>
       );
     }
     return (
-      <MarvelDisplayList
-        charactersActions={charactersActions}
-        characters={characters}
-        handleClick={this.handleClick}
-        isFetching={isFetching} />
+      <UserHistoryPage
+        eventActions={eventActions}
+        events={user_events}
+        isFetching={fetchingEvents}
+      />
     );
   }
 
@@ -67,6 +94,7 @@ class App extends Component {
           isAuthenticated={isAuthenticated}
           errorMessage={errorMessage}
           authActions={authActions}
+          handleNavBarClick={this.handleNavBarClick}
         />
         <div className='container'>
           {isAuthenticated ?
@@ -79,26 +107,32 @@ class App extends Component {
     );
   }
 }
-// These props come from the application's
-// state when it is started
+
 function mapStateToProps(state) {
 
-  const { auth, marvel_characters } = state;
+  const { auth, marvel_characters, events } = state;
   const { isAuthenticated, errorMessage } = auth;
   const { characters, isFetching } = marvel_characters;
+  const user_events = events.events;
+  const event = events.event;
+  const fetchingEvents = events.isFetching;
 
   return {
     isAuthenticated,
     errorMessage,
     characters,
-    isFetching
+    isFetching,
+    user_events,
+    fetchingEvents,
+    event
   };
 }
 
 function mapDispatchToProps(dispatch){
   return {
     authActions: bindActionCreators(authActions, dispatch),
-    charactersActions: bindActionCreators(charactersActions, dispatch)
+    charactersActions: bindActionCreators(charactersActions, dispatch),
+    eventActions: bindActionCreators(eventActions, dispatch)
   };
 }
 

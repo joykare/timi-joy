@@ -40,8 +40,10 @@ class MarvelDisplayList extends Component {
   render() {
     return (
       <div>
+        <h4 style={{ padding: 20 }}>Marvel Characters:</h4>
+
         {this.props.isFetching ?
-          <p>Be patient. Loading...</p> :
+          <p>Be patient. Loading Marvel Characters...</p> :
 
           <table className="table" style={{ textAlign: "center" }}>
             <tbody>
