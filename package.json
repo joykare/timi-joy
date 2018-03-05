@@ -19,6 +19,8 @@
   },
   "homepage": "https://github.com/joykare/timi-joy#readme",
   "dependencies": {
+    "bcrypt": "^1.0.3",
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "dotenv": "^5.0.1",
@@ -27,6 +29,8 @@
     "html-webpack-plugin": "^3.0.4",
     "jest": "^22.4.2",
     "jest-cli": "^22.4.2",
+    "jsonwebtoken": "^8.2.0",
+    "mongoose": "^5.0.8",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "webpack": "^4.1.0",
