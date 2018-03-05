@@ -102,7 +102,7 @@ export function signupUser(credentials) {
     dispatch(requestSignUp(credentials));
     return (
       request
-        .post("/api/user")
+        .post("http://localhost:3000/api/user")
         .send(credentials)
         .then((response) => {
           localStorage.setItem("access_token", response.body.token);
@@ -119,7 +119,6 @@ export function signupUser(credentials) {
 export function logoutUser() {
   return dispatch => {
     dispatch(requestLogout());
-    localStorage.removeItem("id_token");
     localStorage.removeItem("access_token");
     dispatch(receiveLogout());
   };

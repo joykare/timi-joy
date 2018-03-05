@@ -5,7 +5,7 @@ import * as constants from "../constants";
 // we would also want a util to check if the token is expired.
 export default function auth(state = {
   isFetching: false,
-  isAuthenticated: localStorage.getItem("id_token") ? true : false
+  isAuthenticated: localStorage.getItem("access_token") ? true : false
 }, action) {
   switch (action.type) {
   case constants.SIGNUP_REQUEST:
