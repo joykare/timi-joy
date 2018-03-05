@@ -14,6 +14,7 @@ class App extends Component {
     charactersActions: PropTypes.object,
     characters: PropTypes.array,
     isAuthenticated: PropTypes.bool,
+    isFetching: PropTypes.bool,
     errorMessage: PropTypes.string,
   }
 
@@ -79,8 +80,7 @@ class App extends Component {
     );
   }
 }
-// These props come from the application's
-// state when it is started
+
 function mapStateToProps(state) {
 
   const { auth, marvel_characters } = state;

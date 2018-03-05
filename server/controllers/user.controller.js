@@ -43,7 +43,8 @@ module.exports = {
         } else {
           // if password matches create token
           const payload = {
-            email: user.email
+            email: user.email,
+            id: user._id
           };
           const token = jwt.sign(payload, process.env.SUPER_SECRET, { expiresIn: "12h" });
           res.send({
