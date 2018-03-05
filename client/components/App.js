@@ -6,6 +6,7 @@ import * as authActions from "../actions/Auth";
 import * as charactersActions from "../actions/MarvelCharacters";
 import Navbar from "./Navbar";
 import MarvelDisplayList from "./MarvelDisplayList";
+import MarvelDetailPage from "./MarvelDetailPage";
 
 class App extends Component {
   static propTypes = {
@@ -16,8 +17,40 @@ class App extends Component {
     errorMessage: PropTypes.string,
   }
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      isClicked: false,
+      character: {}
+    };
+  }
+
+  handleClick = (character) => {
+    this.setState({
+      character,
+      isClicked: true
+    });
+  }
+
+  displayMarvelPage() {
+    const { isClicked, character } = this.state;
+    const { characters, charactersActions } = this.props;
+
+    if (isClicked) {
+      return (
+        <MarvelDetailPage character={character}/>
+      );
+    }
+    return (
+      <MarvelDisplayList
+        charactersActions={charactersActions}
+        characters={characters}
+        handleClick={this.handleClick} />
+    );
+  }
+
   render() {
-    const { authActions, isAuthenticated, errorMessage, characters, charactersActions } = this.props;
+    const { authActions, isAuthenticated, errorMessage } = this.props;
     return (
       <div>
         <Navbar
@@ -27,11 +60,9 @@ class App extends Component {
         />
         <div className='container'>
           {isAuthenticated ?
-            <MarvelDisplayList
-              charactersActions={charactersActions}
-              characters={characters}
-            /> :
-            <h2 style={{ textAlign: "center" }}> Not authorized </h2>
+            this.displayMarvelPage()
+            :
+            <h2 style={{ textAlign: "center" }}> Sign up form here </h2>
           }
         </div>
       </div>
@@ -42,8 +73,9 @@ class App extends Component {
 // state when it is started
 function mapStateToProps(state) {
 
-  const { auth, characters } = state;
+  const { auth, marvel_characters } = state;
   const { isAuthenticated, errorMessage } = auth;
+  const { characters } = marvel_characters;
 
   return {
     isAuthenticated,
