@@ -41,7 +41,7 @@ class MarvelDisplayList extends Component {
     return (
       <div>
         {this.props.isFetching ?
-          <p>Be patient. Loading...</p> :
+          <p>Be patient. Loading Marvel Characters...</p> :
 
           <table className="table" style={{ textAlign: "center" }}>
             <tbody>

@@ -40,21 +40,3 @@ export function fetchCharacters() {
   };
 }
 
-export function saveClickHistory(character) {
-  return (dispatch) => {
-    dispatch(saveRequest(character));
-
-    const token = localStorage.getItem("access_token");
-    return (
-      request
-        .post("http://localhost:3000/api/event")
-        .set("x-access-token", token)
-        .send(character)
-        .then(response => {
-          dispatch(saveSuccess(response.body));
-        }).catch(err => {
-          throw err;
-        })
-    );
-  };
-}

@@ -6,6 +6,7 @@ import Logout from "./Logout";
 export default class Navbar extends Component {
   static propTypes = {
     authActions: PropTypes.object,
+    handleNavBarClick: PropTypes.func,
     isAuthenticated: PropTypes.bool,
     errorMessage: PropTypes.string
   }
@@ -16,6 +17,10 @@ export default class Navbar extends Component {
 
   handleOnLogoutClick = () => {
     this.props.authActions.logoutUser();
+  }
+
+  handleClick = (name) => {
+    this.props.handleNavBarClick(name);
   }
 
   renderMainNavBar() {
@@ -48,8 +53,8 @@ export default class Navbar extends Component {
     return (
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb" style={{backgroundColor: "white"}}>
-          <li className="breadcrumb-item"><a href="#">Home</a></li>
-          <li className="breadcrumb-item active" aria-current="page">User History</li>
+          <li className="breadcrumb-item"><a href="#" onClick={() => this.handleClick("home")}>Home</a></li>
+          <li className="breadcrumb-item"><a href="#" onClick={() => this.handleClick("history")}>User History</a></li>
         </ol>
       </nav>
     );
