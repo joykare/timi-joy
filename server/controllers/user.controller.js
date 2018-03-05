@@ -2,6 +2,23 @@ const User = require("../models/user.model.js");
 const jwt = require("jsonwebtoken");
 
 module.exports = {
+  auth: (req, res, next) => {
+    const token = req.body.token || req.query.token || req.headers["x-access-token"];
+
+    if (token) {
+      jwt.verify(token, process.env.SUPER_SECRET, function (err, decoded) {
+        if (err) {
+          res.status(400).send({ message: "Failed to authenticate token" });
+        } else {
+          req.decoded = decoded;
+          next();
+        }
+      });
+    } else {
+      res.status(403).send({ message: "No token provided" });
+    }
+  },
+
   login: (req, res) => {
     User.findOne({
       email: req.body.email
@@ -13,7 +30,6 @@ module.exports = {
         });
       } else if (user) {
         // check pass match
-        console.log("user", user, req.passsword);
         const validPassword = user.comparePassword(req.body.password);
         if (!validPassword) {
           res.status(401).send({
@@ -55,6 +71,18 @@ module.exports = {
         }
       } else {
         res.send(user);
+      }
+    });
+  },
+
+  get: (req, res) => {
+    User.find((err, users) => {
+      if (err) {
+        res.status(500).send({
+          message: "Error occured while accessing the user"
+        });
+      } else {
+        res.json(users);
       }
     });
   }
