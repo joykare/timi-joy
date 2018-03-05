@@ -1,0 +1,46 @@
+{
+  "name": "marvel-api-2.0",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:bend": "nodemon index.js",
+    "start:dev-fend": "webpack-dev-server --mode development",
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joykare/timi-joy.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joykare/timi-joy/issues"
+  },
+  "homepage": "https://github.com/joykare/timi-joy#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "dotenv": "^5.0.1",
+    "express": "^4.16.2",
+    "g": "^2.0.1",
+    "html-webpack-plugin": "^3.0.4",
+    "jest": "^22.4.2",
+    "jest-cli": "^22.4.2",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "webpack": "^4.1.0",
+    "webpack-dev-server": "^3.1.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.3",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "eslint": "^4.18.2",
+    "eslint-plugin-react": "^7.7.0",
+    "path": "^0.12.7",
+    "webpack-cli": "^2.0.10"
+  }
+}
