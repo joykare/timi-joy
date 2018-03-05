@@ -3,7 +3,6 @@ const app = express();
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const jwt = require("jsonwebtoken");
 const routes = require("./server/routes");
 var router = express.Router();
 const env = process.env.NODE_ENV;

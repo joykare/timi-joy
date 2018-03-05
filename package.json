@@ -19,6 +19,8 @@
   },
   "homepage": "https://github.com/joykare/timi-joy#readme",
   "dependencies": {
+    "bcrypt": "^1.0.3",
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "dotenv": "^5.0.1",
