@@ -14,28 +14,28 @@ class UserHistoryPage extends Component {
 
   displayEvents() {
     const { events, isFetching } = this.props;
-    if (events.length) {
+    if (isFetching) {
       return (
-        <div style={{ paddingTop: 20 }}>
-          {isFetching ?
-            <p>Be patient. Loading your searches...</p>
-            :
-            <div>
-              {events.map((event, i) => (
-                <ul className="list-group" key={i}>
-                  <li className="list-group-item">
-                    {event.characterName}
-                    <small style={{ float: "right" }}>{event.createdAt}</small>
-                  </li>
-                </ul>
-              ))}
-            </div>
-          }
-        </div>
+        <p>Be patient. Loading your searches...</p>
       );
     }
     return (
-      <p>No searches yet!!</p>
+      <div style={{ paddingTop: 20 }}>
+        {!events.length ?
+          <p>No searches yet!!</p>
+          :
+          <div>
+            {events.map((event, i) => (
+              <ul className="list-group" key={i}>
+                <li className="list-group-item">
+                  {event.characterName}
+                  <small style={{ float: "right" }}>{event.createdAt}</small>
+                </li>
+              </ul>
+            ))}
+          </div>
+        }
+      </div>
     );
   }
 
