@@ -86,11 +86,12 @@ export function loginUser(credentials) {
         .post("http://localhost:3000/api/user/login", config)
         .send(credentials)
         .then((response) => {
+          console.log("response", response);
           // If login was successful, set the token in local storage
           localStorage.setItem("access_token", response.body.token);
           dispatch(receiveLogin(response.body));
         }).catch((err) => {
-          dispatch(loginError(err.response.body));
+          dispatch(loginError(err.response.body.message));
         })
     );
   };
@@ -107,7 +108,7 @@ export function signupUser(credentials) {
           localStorage.setItem("access_token", response.body.token);
           dispatch(receiveSignUp(response.body));
         }).catch((err) => {
-          dispatch(signUpError(err.response.body));
+          dispatch(signUpError(err.response.body.message));
         })
     );
   };

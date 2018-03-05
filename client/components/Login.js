@@ -37,7 +37,7 @@ class Login extends Component {
         <button onClick={this.handleClick} className="btn btn-primary">
           Login
         </button>
-        {errorMessage && <p>{errorMessage}</p>}
+        {errorMessage && <p className="alert alert-danger" style={{ marginTop: 10 }}>{errorMessage}</p>}
       </div>
     );
   }

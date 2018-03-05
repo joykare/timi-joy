@@ -23,9 +23,13 @@ module.exports = {
     User.findOne({
       email: req.body.email
     }, (err, user) => {
-      if (err) throw err;
+      if (err) {
+        res.status(500).send({
+          message: "Failed to log in, try again"
+        });
+      }
       if (!user) {
-        res.send({
+        res.status(401).send({
           message: "Authentication failed. User not found"
         });
       } else if (user) {
