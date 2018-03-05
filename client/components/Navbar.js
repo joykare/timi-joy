@@ -49,7 +49,7 @@ export default class Navbar extends Component {
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb" style={{backgroundColor: "white"}}>
           <li className="breadcrumb-item"><a href="#">Home</a></li>
-          <li className="breadcrumb-item active" aria-current="page">Library</li>
+          <li className="breadcrumb-item active" aria-current="page">User History</li>
         </ol>
       </nav>
     );

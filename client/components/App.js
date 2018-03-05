@@ -32,20 +32,30 @@ class App extends Component {
     });
   }
 
+  handleBackClick = () => {
+    this.setState({
+      isClicked: false
+    });
+  }
+
   displayMarvelPage() {
     const { isClicked, character } = this.state;
-    const { characters, charactersActions } = this.props;
+    const { characters, charactersActions, isFetching } = this.props;
 
     if (isClicked) {
       return (
-        <MarvelDetailPage character={character}/>
+        <MarvelDetailPage
+          character={character}
+          handleBackClick={this.handleBackClick}
+        />
       );
     }
     return (
       <MarvelDisplayList
         charactersActions={charactersActions}
         characters={characters}
-        handleClick={this.handleClick} />
+        handleClick={this.handleClick}
+        isFetching={isFetching} />
     );
   }
 
@@ -75,12 +85,13 @@ function mapStateToProps(state) {
 
   const { auth, marvel_characters } = state;
   const { isAuthenticated, errorMessage } = auth;
-  const { characters } = marvel_characters;
+  const { characters, isFetching } = marvel_characters;
 
   return {
     isAuthenticated,
     errorMessage,
-    characters
+    characters,
+    isFetching
   };
 }
 
